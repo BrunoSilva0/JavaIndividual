@@ -6,8 +6,6 @@ import com.github.britooo.looca.api.group.memoria.Memoria;
 import com.github.britooo.looca.api.util.Conversor;
 
 public class MemoriaService {
-
-    Conversor conversor = new Conversor();
     Looca looca = new Looca();
     TemplateMySQL templateMySQL = new TemplateMySQL();
 
@@ -17,8 +15,7 @@ public class MemoriaService {
 
     public String pegarTamanhoTotalLooca() {
         Long tamanhoTotal = pegarMemoriaLooca().getTotal();
-        String tamanhoTotalConvertida = conversor.formatarBytes(tamanhoTotal);
-        return tamanhoTotalConvertida;
+        return Conversor.formatarBytes(tamanhoTotal);
     }
 
     public void inserirDadosMemoria(){

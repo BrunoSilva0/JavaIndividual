@@ -13,8 +13,8 @@ public class Main {
     public static void main(String[] args) {
         TemplateMySQL templateMySQL = new TemplateMySQL();
 
-        Integer delay = 2000;
-        Integer intervalo = 15000;
+        int delay = 2000;
+        int intervalo = 15000;
         Timer timer = new Timer();
 
         AtmService atmService = new AtmService();
@@ -71,14 +71,12 @@ public class Main {
                 registroDispositivoUsbConectadoService.inserirDadosRegistroUsb();
 
                 System.out.println(templateMySQL.getTemplateMySQl().query("""
-                    select * from registro;
-                    """, new BeanPropertyRowMapper<>(RegistroModel.class))
-                );
+                select * from registro;
+                """, new BeanPropertyRowMapper<>(RegistroModel.class)));
 
                 System.out.println(templateMySQL.getTemplateMySQl().query("""
-                    select * from registrodispositivousbconectado limit 1;
-                    """, new BeanPropertyRowMapper<>(RegistroDispositivoUsbConectadoModel.class))
-                );
+                select * from registrodispositivousbconectado limit 1;
+                """, new BeanPropertyRowMapper<>(RegistroDispositivoUsbConectadoModel.class)));
             }
         }, delay, intervalo);
     }
