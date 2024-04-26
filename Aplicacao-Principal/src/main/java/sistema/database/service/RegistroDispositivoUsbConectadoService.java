@@ -33,15 +33,15 @@ public class RegistroDispositivoUsbConectadoService {
             }
 
             fkRegistro = templateMySQL.getTemplateMySQl().queryForObject("""
-                select * from Registro where idRegistro = ?;
+                select * from registro where idRegistro = ?;
                 """, new BeanPropertyRowMapper<>(RegistroModel.class), templateMySQL.pegarIdRegistroMaisRecente()).getIdRegistro();
 
             fkDispositivoUsb = templateMySQL.getTemplateMySQl().queryForObject("""
-                select * from DispositivoUsb where idDispositivoUsb = ?;
+                select * from dispositivousb where idDispositivoUsb = ?;
                 """, new BeanPropertyRowMapper<>(DispositivoUsbModel.class), i+1).getIdDispositivoUsb();
 
             templateMySQL.getTemplateMySQl().update("""
-                    insert into RegistroDispositivoUsbConectado (fkRegistro, fkDispositivoUsb, conectado) values (?, ?, ?)
+                    insert into registroDispositivousbconectado (fkRegistro, fkDispositivoUsb, conectado) values (?, ?, ?)
                     """,fkRegistro, fkDispositivoUsb, conectado);
         }
     }

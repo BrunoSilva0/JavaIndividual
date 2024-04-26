@@ -23,7 +23,7 @@ public class MemoriaService {
 
     public void inserirDadosMemoria(){
         templateMySQL.getTemplateMySQl().update("""
-                    insert into Memoria (tamanhoTotal, fkAtm) values
+                    insert into memoria (tamanhoTotal, fkAtm) values
                     (?, ?);
                 """, pegarTamanhoTotalLooca(), templateMySQL.pegarIdAtmMaisRecente());
     }

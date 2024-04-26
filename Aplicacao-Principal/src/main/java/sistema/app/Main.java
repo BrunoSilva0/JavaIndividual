@@ -1,26 +1,85 @@
 package sistema.app;
 
-//import sistema.database.model.*;
-//import sistema.database.service.*;
-//import sistema.database.template.TemplateMySQL;
-import java.util.Scanner;
+import sistema.database.model.*;
+import sistema.database.service.*;
+import sistema.database.template.TemplateMySQL;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner leitor = new Scanner(System.in);
-        Criptografia criptografia = new Criptografia();
+        TemplateMySQL templateMySQL = new TemplateMySQL();
 
-        System.out.println("Digite sua senha: ");
-        String senha = leitor.nextLine();
-        String senhaCripto = criptografia.criptografarSenha(senha);
+        Integer delay = 2000;
+        Integer intervalo = 15000;
+        Timer timer = new Timer();
 
-        System.out.println("Confirme a senha:");
-        String confirmacao = leitor.nextLine();
+        AtmService atmService = new AtmService();
+        ProcessadorService processadorService = new ProcessadorService();
+        MemoriaService memoriaService = new MemoriaService();
+        DiscoService discoService= new DiscoService();
+        DispositivoUsbService dispositivoUsbService = new DispositivoUsbService();
+        RegistroService registroService = new RegistroService();
+        RegistroDispositivoUsbConectadoService registroDispositivoUsbConectadoService = new RegistroDispositivoUsbConectadoService();
 
-        System.out.println("Senha criptografada: " + senhaCripto);
-        System.out.println("Segunda tentativa: " + confirmacao);
+        atmService.inserirDadosAtm();
+        processadorService.inserirDadosProcessador();
+        memoriaService.inserirDadosMemoria();
+        discoService.inserirPegarModeloVolumeDiscoLooca();
+        dispositivoUsbService.inserirPegarNomeDispositivo();
 
-        boolean autenticacao = criptografia.autenticarSenha(confirmacao, senhaCripto);
-        System.out.println("Autenticação: " + (autenticacao ? "Senha correta" : "Senha incorreta"));
+        List<BancoModel> listaTeste = templateMySQL.getTemplateMySQl().query("""
+                select * from banco;
+                """, new BeanPropertyRowMapper<>(BancoModel.class)
+        );
+
+        System.out.println(listaTeste);
+
+
+        System.out.println(templateMySQL.getTemplateMySQl().query("""
+                select * from atm;
+                """, new BeanPropertyRowMapper<>(AtmModel.class))
+        );
+
+        System.out.println(templateMySQL.getTemplateMySQl().query("""
+                select * from processador;
+                """, new BeanPropertyRowMapper<>(ProcessadorModel.class))
+        );
+
+        System.out.println(templateMySQL.getTemplateMySQl().query("""
+                select * from memoria;
+                """, new BeanPropertyRowMapper<>(MemoriaModel.class))
+        );
+
+        System.out.println(templateMySQL.getTemplateMySQl().query("""
+                select * from disco;
+                """, new BeanPropertyRowMapper<>(DiscoModel.class))
+        );
+
+        System.out.println(templateMySQL.getTemplateMySQl().query("""
+                select * from dispositivousb;
+                """, new BeanPropertyRowMapper<>(DispositivoUsbModel.class))
+        );
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                registroService.inserirDadosRegistro();
+                registroDispositivoUsbConectadoService.inserirDadosRegistroUsb();
+
+                System.out.println(templateMySQL.getTemplateMySQl().query("""
+                    select * from registro;
+                    """, new BeanPropertyRowMapper<>(RegistroModel.class))
+                );
+
+                System.out.println(templateMySQL.getTemplateMySQl().query("""
+                    select * from registrodispositivousbconectado limit 1;
+                    """, new BeanPropertyRowMapper<>(RegistroDispositivoUsbConectadoModel.class))
+                );
+            }
+        }, delay, intervalo);
     }
 }

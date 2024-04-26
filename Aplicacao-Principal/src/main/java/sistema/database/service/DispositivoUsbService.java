@@ -24,7 +24,7 @@ public class DispositivoUsbService {
             String nomeDispositivo = pegarListaDispositivoUsbLooca().get(i).getNome();
 
             templateMySQL.getTemplateMySQl().update("""
-                    insert into DispositivoUsb (nomeDispositivo, fkAtm) values (?, ?)
+                    insert into dispositivousb (nomeDispositivo, fkAtm) values (?, ?)
                     """, nomeDispositivo, templateMySQL.pegarIdAtmMaisRecente());
         }
     }

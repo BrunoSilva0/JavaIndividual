@@ -9,7 +9,7 @@ public class ConexaoMySQL {
     public ConexaoMySQL() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/nuvent");
+        dataSource.setUrl("jdbc:mysql://localhost:3308/nuvent");
         dataSource.setUsername("nuventUser");
         dataSource.setPassword("nuvent");
         conexaoBanco = new JdbcTemplate(dataSource);

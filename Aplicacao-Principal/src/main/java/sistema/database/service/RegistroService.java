@@ -32,32 +32,26 @@ public class RegistroService {
     }
 
     public Integer pegarQtdTotalProcessosLooca() {
-//        Aqui está certo chamar o looca dessa forma
-        Integer qtdTotalProcessos = looca.getGrupoDeProcessos().getTotalProcessos();
-        return qtdTotalProcessos;
+        return looca.getGrupoDeProcessos().getTotalProcessos();
     }
 
     public String pegarPorcentagemUsoProcessador() {
         Double usoProcessador = pegarUsoProcessador() * 10.0;
-        String porcentagemUsoProcessador = formatarDecimal.format(usoProcessador);
-        return porcentagemUsoProcessador;
+        return formatarDecimal.format(usoProcessador);
     }
 
     public String pegarQtdUsoMemoria() {
-        String qtdUsoMemoria = conversor.formatarBytes(pegarUsoMemoria());
-        return qtdUsoMemoria;
+        return Conversor.formatarBytes(pegarUsoMemoria());
     }
 
     public String pegarQtdDisponivelMemoria() {
         Long qtdDisponivelMemoriaBytes = pegarDisponivelMemoria();
-        String qtdDisponivelMemoria = conversor.formatarBytes(qtdDisponivelMemoriaBytes);
-        return qtdDisponivelMemoria;
+        return Conversor.formatarBytes(qtdDisponivelMemoriaBytes);
     }
 
     public String pegarPorcentagemUsoMemoria() {
         Double porcentagemUsoMemoriaBytes = (pegarUsoMemoria() * 100.0) / pegarTotalMemoria();
-        String porcentagemUsoMemoria = formatarDecimal.format(porcentagemUsoMemoriaBytes);
-        return porcentagemUsoMemoria;
+        return formatarDecimal.format(porcentagemUsoMemoriaBytes);
     }
 
 //    Faz insert do registro e também coleta os dados de Disco necessários
@@ -68,15 +62,25 @@ public class RegistroService {
             Long qtdUsoDiscoBytes = qtdTotalDiscoBytes - qtdDisponivelDiscoBytes;
             Double porcentagemUsoDiscoBytes = (qtdUsoDiscoBytes * 100.0) / qtdTotalDiscoBytes;
 
-            String qtdUsoDisco = conversor.formatarBytes(qtdUsoDiscoBytes);
-            String qtdDisponivelDisco = conversor.formatarBytes(qtdDisponivelDiscoBytes);
+            String qtdUsoDisco = Conversor.formatarBytes(qtdUsoDiscoBytes);
+            String qtdDisponivelDisco = Conversor.formatarBytes(qtdDisponivelDiscoBytes);
             String porcentagemUsoDisco = formatarDecimal.format(porcentagemUsoDiscoBytes);
 
             templateMySQL.getTemplateMySQl().update("""
-                    insert into Registro
-                    (qtdTotalProcessos, porcentagemUsoProcessador, qtdUsoMemoria, qtdDisponivelMemoria,
-                    porcentagemUsoMemoria, qtdUsoDisco, qtdDisponivelDisco, porcentagemUsoDisco, fkProcessador,
-                    fkMemoria, fkDisco)
+                    insert into registro
+                    (
+                        qtdTotalProcessos,
+                        porcentagemUsoProcessador,
+                        qtdUsoMemoria,
+                        qtdDisponivelMemoria,
+                        porcentagemUsoMemoria,
+                        qtdUsoDisco,
+                        qtdDisponivelDisco,
+                        porcentagemUsoDisco,
+                        fkProcessador,
+                        fkMemoria,
+                        fkDisco
+                    )
                     values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """, pegarQtdTotalProcessosLooca(), pegarPorcentagemUsoProcessador(), pegarQtdUsoMemoria(),
                     pegarQtdDisponivelMemoria(), pegarPorcentagemUsoMemoria(), qtdUsoDisco, qtdDisponivelDisco,

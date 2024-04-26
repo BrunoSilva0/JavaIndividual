@@ -24,7 +24,7 @@ public class AtmService {
 
     public void inserirDadosAtm() {
         templateMySQL.getTemplateMySQl().update("""
-                insert into Atm (sistemaOperacional, arquitetura, fkBanco) values (?, ?, ?)
+                insert into atm (sistemaOperacional, arquitetura, fkBanco) values (?, ?, ?)
                 """, pegarSistemaOperacionalLooca(), pegarArquiteturaLooca(), templateMySQL.pegarIdBancoMaisRecente());
     }
 }

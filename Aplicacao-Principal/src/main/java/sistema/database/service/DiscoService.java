@@ -33,7 +33,7 @@ public class DiscoService {
             String volumeDisco = Conversor.formatarBytes(pegarListaVolumeLooca().get(i).getTotal());
 
             templateMySQL.getTemplateMySQl().update("""
-                insert into Disco (modeloDisco, volumeDisco, fkAtm) values
+                insert into disco (modeloDisco, volumeDisco, fkAtm) values
                     (?, ?, ?);
                 """, modeloDisco, volumeDisco, templateMySQL.pegarIdAtmMaisRecente()
             );

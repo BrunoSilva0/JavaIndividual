@@ -15,34 +15,29 @@ public class ProcessadorService {
     }
 
     public String pegarNomeProcessadorLooca() {
-        String nomeProcessador = pegarProcessadorLooca().getNome();
-        return nomeProcessador;
+        return pegarProcessadorLooca().getNome();
     }
 
     public String pegarModeloProcessadorLooca() {
-        String modeloProcessador = pegarProcessadorLooca().getIdentificador();
-        return modeloProcessador;
+        return pegarProcessadorLooca().getIdentificador();
     }
 
     public String pegarFrequenciaProcessadorLooca() {
         Long frequenciaProcessadorBytes = pegarProcessadorLooca().getFrequencia();
-        String frequenciaProcessador = conversor.formatarBytes(frequenciaProcessadorBytes);
-        return frequenciaProcessador;
+        return Conversor.formatarBytes(frequenciaProcessadorBytes);
     }
 
     public Integer pegarQtdProcessadorFisicoLooca() {
-        Integer qtdProcessadorFisico = looca.getProcessador().getNumeroCpusFisicas();
-        return qtdProcessadorFisico;
+        return looca.getProcessador().getNumeroCpusFisicas();
     }
 
     public Integer pegarQtdProcessadorLogicoLooca() {
-        Integer qtdProcessadorLogico = pegarProcessadorLooca().getNumeroCpusLogicas();
-        return qtdProcessadorLogico;
+        return pegarProcessadorLooca().getNumeroCpusLogicas();
     }
 
     public void inserirDadosProcessador() {
         templateMySQL.getTemplateMySQl().update("""
-                insert into Processador (nomeProcessador, modeloProcessador, frequenciaProcessador,
+                insert into processador (nomeProcessador, modeloProcessador, frequenciaProcessador,
                 qtdProcessadorFisico, qtdProcessadorLogico, fkAtm) values
                 (?, ?, ?, ?, ?, ?)
                 """, pegarNomeProcessadorLooca(), pegarModeloProcessadorLooca(), pegarFrequenciaProcessadorLooca(), pegarQtdProcessadorFisicoLooca(), pegarQtdProcessadorLogicoLooca(), templateMySQL.pegarIdAtmMaisRecente());
