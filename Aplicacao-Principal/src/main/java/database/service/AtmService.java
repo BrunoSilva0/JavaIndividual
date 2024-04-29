@@ -1,7 +1,7 @@
-package sistema.database.service;
+package database.service;
 
-import sistema.database.model.AtmModel;
-import sistema.database.template.TemplateMySQL;
+import database.model.AtmModel;
+import database.template.TemplateMySQL;
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.sistema.Sistema;
 

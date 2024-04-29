@@ -1,10 +1,9 @@
-package sistema.database.template;
+package database.template;
 
-import sistema.database.connection.ConexaoMySQL;
-import sistema.database.model.*;
+import database.connection.ConexaoMySQL;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import sistema.database.model.*;
+import database.model.*;
 
 public class TemplateMySQL {
     public ConexaoMySQL conexaoMySQL = new ConexaoMySQL();
@@ -16,7 +15,7 @@ public class TemplateMySQL {
     public Integer pegarIdBancoMaisRecente() {
         return templateMySQl.queryForObject("""
                     select * from banco order by idBanco desc limit 1
-                    """, new BeanPropertyRowMapper<>(BancoModel.class)).getIdBanco();
+                    """, new BeanPropertyRowMapper<>(database.model.BancoModel.class)).getIdBanco();
     }
 
     public Integer pegarIdAtmMaisRecente() {

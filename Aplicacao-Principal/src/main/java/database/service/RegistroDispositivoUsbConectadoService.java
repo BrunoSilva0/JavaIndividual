@@ -1,8 +1,8 @@
-package sistema.database.service;
+package database.service;
 
-import sistema.database.model.DispositivoUsbModel;
-import sistema.database.model.RegistroModel;
-import sistema.database.template.TemplateMySQL;
+import database.model.DispositivoUsbModel;
+import database.model.RegistroModel;
+import database.template.TemplateMySQL;
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.dispositivos.DispositivoUsb;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

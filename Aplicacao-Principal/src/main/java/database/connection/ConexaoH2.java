@@ -1,10 +1,10 @@
-package sistema.database.connection;
+package database.connection;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class ConexaoH2 {
-    private JdbcTemplate conexaoBanco;
+    private final JdbcTemplate conexaoBanco;
 
     public ConexaoH2() {
         BasicDataSource dataSource = new BasicDataSource();

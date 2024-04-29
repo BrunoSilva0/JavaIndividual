@@ -1,8 +1,6 @@
-package sistema.app;
-
-import sistema.database.model.*;
-import sistema.database.service.*;
-import sistema.database.template.TemplateMySQL;
+import database.model.*;
+import database.service.*;
+import database.template.TemplateMySQL;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import java.util.List;
@@ -24,6 +22,7 @@ public class Main {
         DispositivoUsbService dispositivoUsbService = new DispositivoUsbService();
         RegistroService registroService = new RegistroService();
         RegistroDispositivoUsbConectadoService registroDispositivoUsbConectadoService = new RegistroDispositivoUsbConectadoService();
+        GerenciadorRecursos gerenciadorRecursos = new GerenciadorRecursos();
 
         atmService.inserirDadosAtm();
         processadorService.inserirDadosProcessador();
@@ -63,6 +62,7 @@ public class Main {
                 select * from dispositivousb;
                 """, new BeanPropertyRowMapper<>(DispositivoUsbModel.class))
         );
+        gerenciadorRecursos.setVisible(true);
 
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override

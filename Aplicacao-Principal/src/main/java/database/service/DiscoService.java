@@ -1,6 +1,6 @@
-package sistema.database.service;
+package database.service;
 
-import sistema.database.template.TemplateMySQL;
+import database.template.TemplateMySQL;
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.discos.Disco;
 import com.github.britooo.looca.api.group.discos.DiscoGrupo;

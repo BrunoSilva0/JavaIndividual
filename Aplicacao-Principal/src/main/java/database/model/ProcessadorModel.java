@@ -1,4 +1,4 @@
-package sistema.database.model;
+package database.model;
 
 public class ProcessadorModel {
     private Integer idProcessador;

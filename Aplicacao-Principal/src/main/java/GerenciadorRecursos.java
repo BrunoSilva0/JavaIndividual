@@ -1,12 +1,10 @@
-package sistema.app;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.util.Conversor;
 
-import sistema.database.service.DiscoService;
-import sistema.database.service.RegistroService;
+import database.service.DiscoService;
+import database.service.RegistroService;
 
 import java.awt.*;
 
@@ -74,8 +72,4 @@ public class GerenciadorRecursos extends JFrame {
         table.getColumnModel().getColumn(1).setPreferredWidth(250);
     }
 
-    public static void main(String[] args) {
-        GerenciadorRecursos gerenciadorRecursos = new GerenciadorRecursos();
-        gerenciadorRecursos.setVisible(true);
-    }
 }
